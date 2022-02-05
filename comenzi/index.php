@@ -19,13 +19,13 @@ include '../components/header.php';
                 <select class="form-select d-inline-block w-auto" name="cod_utilizator">
                     <option value="">Alege utilizator</option>
                     <?php while ($utilizator = mysqli_fetch_assoc($utilizatori)) :?>
-                        <option value="<?= $utilizator["cod_utilizator"] ?>"><?= $utilizator["utilizator"] ?></option>
+                        <option <?= ($_GET["utilizator"] == $utilizator["cod_utilizator"] ? 'selected="selected"' : '') ?> value="<?= $utilizator["cod_utilizator"] ?>"><?= $utilizator["utilizator"] ?></option>
                     <?php endwhile ?>
                 </select>
                 <select class="form-select d-inline-block w-auto" name="cod_status">
                     <option value="">Status</option>
                     <?php while ($stat = mysqli_fetch_assoc($status)) :?>
-                        <option value="<?= $stat["cod_status"] ?>"><?= $stat["status_comanda"] ?></option>
+                        <option <?= ($_GET["status"] == $stat["cod_status"] ? 'selected="selected"' : '') ?> value="<?= $stat["cod_status"] ?>"><?= $stat["status_comanda"] ?></option>
                     <?php endwhile ?>
                 </select>
                 <button class="btn btn-primary">Filtreaza</button>
