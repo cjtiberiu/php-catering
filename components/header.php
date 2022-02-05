@@ -32,15 +32,9 @@
                     <li class="navigation-item">
                         <a href="/catering/produse">Produse</a>
                     </li>
-                    <?php if (isset($_SESSION["rol_utilizator"]) && $_SESSION["rol_utilizator"] == "admin") :?>
-                    <li class="navigation-item">
-                        <a href="/catering/comenziadministrator">Comenzi</a>
-                    </li>
-                    <?php else :?>
                     <li class="navigation-item">
                         <a href="/catering/comenzi">Comenzi</a>
                     </li>
-                    <?php endif ?>
                     <?php if (isset($_SESSION["logat"]) && $_SESSION["logat"] == true) :?>
                         <li class="navigation-item">
                             <a href="/catering/delogare.php">Deconectare</a>
