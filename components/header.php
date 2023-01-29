@@ -33,7 +33,7 @@
                         <a href="/catering/produse">Produse</a>
                     </li>
                     <li class="navigation-item">
-                        <a href="/catering/comenzi">Comenzi</a>
+                        <a href="/catering/comenzi?utilizator=&status=">Comenzi</a>
                     </li>
                     <?php if (isset($_SESSION["logat"]) && $_SESSION["logat"] == true) :?>
                         <li class="navigation-item">

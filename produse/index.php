@@ -8,7 +8,7 @@ include '../components/header.php';
     <div class="heading-divider"></div>
     <div class="row products-wrapper mt-4">
         <?php
-        $query_produse = "SELECT denumire, imagine_produs, descriere, pret_unitar FROM produse";
+        $query_produse = "SELECT cod_produs, denumire, imagine_produs, descriere, pret_unitar FROM produse";
         $produse = mysqli_query($cnx, $query_produse) or die("Eroare: " . mysqli_error($cnx));
 
         while($produs = mysqli_fetch_assoc($produse)) : ?>
@@ -21,7 +21,12 @@ include '../components/header.php';
                             <p class="card-text"><?= $produs["descriere"] ?></p>
                             <h5><?= $produs["pret_unitar"] ?> RON / 1kg</h5>
                         </div>
-                        <button class="btn btn-primary mt-2 w-100">Comanda</button>
+                        <?php if (isset($_SESSION["logat"]) && $_SESSION["logat"] == true) :?>
+                            <a href="./adaugacomanda.php?cod=<?= $produs["cod_produs"] ?>" class="btn btn-primary mt-2 w-100">Comanda</a>
+                        <?php else :?>
+                            <p class="text-danger">Trebuie sa va logati pentru a comanda</p>
+                        <?php endif ?>
+                        
                     </div>
                 </div>
             </div>

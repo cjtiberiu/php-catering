@@ -16,19 +16,21 @@ include '../components/header.php';
             ?>
             <?php if ($_SESSION["rol_utilizator"] == "admin") :?>
             <form action="./formulare/filtre.php">
-                <select class="form-select d-inline-block w-auto" name="cod_utilizator">
-                    <option value="">Alege utilizator</option>
-                    <?php while ($utilizator = mysqli_fetch_assoc($utilizatori)) :?>
-                        <option <?= ($_GET["utilizator"] == $utilizator["cod_utilizator"] ? 'selected="selected"' : '') ?> value="<?= $utilizator["cod_utilizator"] ?>"><?= $utilizator["utilizator"] ?></option>
-                    <?php endwhile ?>
-                </select>
-                <select class="form-select d-inline-block w-auto" name="cod_status">
-                    <option value="">Status</option>
-                    <?php while ($stat = mysqli_fetch_assoc($status)) :?>
-                        <option <?= ($_GET["status"] == $stat["cod_status"] ? 'selected="selected"' : '') ?> value="<?= $stat["cod_status"] ?>"><?= $stat["status_comanda"] ?></option>
-                    <?php endwhile ?>
-                </select>
-                <button class="btn btn-primary">Filtreaza</button>
+                <div class="d-flex align-items-center">
+                    <select class="form-select d-inline-block w-auto me-2" name="cod_utilizator">
+                        <option value="">Alege utilizator</option>
+                        <?php while ($utilizator = mysqli_fetch_assoc($utilizatori)) :?>
+                            <option <?= ($_GET["utilizator"] == $utilizator["cod_utilizator"] ? 'selected="selected"' : '') ?> value="<?= $utilizator["cod_utilizator"] ?>"><?= $utilizator["utilizator"] ?></option>
+                        <?php endwhile ?>
+                    </select>
+                    <select class="form-select d-inline-block w-auto me-2" name="cod_status">
+                        <option value="">Status</option>
+                        <?php while ($stat = mysqli_fetch_assoc($status)) :?>
+                            <option <?= ($_GET["status"] == $stat["cod_status"] ? 'selected="selected"' : '') ?> value="<?= $stat["cod_status"] ?>"><?= $stat["status_comanda"] ?></option>
+                        <?php endwhile ?>
+                    </select>
+                    <button class="btn btn-primary py-2">Filtreaza</button>
+                </div>
             </form>
             <?php endif ?>
 
@@ -61,7 +63,9 @@ include '../components/header.php';
                 <table class="table">
                     <thead>
                         <th>Comanda</th>
-                        <th>Utilizator</th>
+                        <?php if ($_SESSION["rol_utilizator"] == "admin") :?>
+                            <th>Utilizator</th>
+                        <?php endif ?>
                         <th>Data Comenzii</th>
                         <th>Adresa Livrare</th>
                         <th>Status</th>
@@ -73,7 +77,9 @@ include '../components/header.php';
                         while($comanda = mysqli_fetch_assoc($comenzi)) : ?>
                         <tr>
                             <td>#<?= $comanda["cod_comanda"] ?></td>
-                            <td><?= $comanda["utilizator"] ?></td>
+                            <?php if ($_SESSION["rol_utilizator"] == "admin") :?>
+                                <td><?= $comanda["utilizator"] ?></td>
+                            <?php endif ?>
                             <td><?= $comanda["data_comanda"] ?></td>
                             <td><?= $comanda["adresa_livrare"] ?></td>
                             <td><?= $comanda["status_comanda"] ?></td>
